@@ -1,0 +1,43 @@
+    * { 
+        box-sizing: border-box; }
+    body { 
+        font-family: sans-serif; 
+        max-width: 700px; 
+        margin: 40px auto;
+        padding: 0 16px; }
+    h1 { 
+        font-size: 1.4rem; }
+    #placeh{
+      color: rgba(191, 217, 240, 0.5);
+    }
+    input { 
+        padding: 6px;
+        margin: 4px 4px 4px 0; }
+    button { 
+        padding: 6px 14px; 
+        margin: 4px; 
+        cursor: pointer; }
+    table { 
+        width: 100%; 
+        border-collapse: collapse; 
+                border-radius: 5px;
+        margin-top: 16px; }
+    th, td { 
+        border: 1px solid #bcbcc0; 
+        padding: 6px; 
+        text-align: left; }
+    th{
+        text-align: center;
+    }
+    .toRight{
+        text-align: right;
+    }
+    #btn-listar{
+      background-color: lightslategrey;
+    }
+    .hidden { 
+        display: none; }
+    .ok { 
+        color: green; }
+    .err { 
+        color: red; }

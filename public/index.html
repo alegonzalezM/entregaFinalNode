@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Productos</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>API de Productos</h1>
+
+<!-- LOGIN -->
+<div id="login">
+  <input id="email" value="" placeholder="admin@gmail.com" id="placeh">
+  <input id="pass" type="password" value="" placeholder="123456" id="placeh">
+  <button onclick="login()">Ingresar</button>
+  <span id="msg"></span>
+</div>
+
+<!-- CRUD (oculto hasta login) -->
+<div id="crud" class="hidden">
+  <h2>Crear</h2>
+  <input id="fNombre" placeholder="nombre">
+  <input id="fPrecio" placeholder="precio" type="number">
+  <input id="fMarca" placeholder="marca">
+  <input id="fCategoria" placeholder="categoria">
+  <input id="fStock" placeholder="stock" type="number">
+  <button onclick="crear()">Crear</button>
+
+  <h2>Productos</h2>
+  <button id="btn-listar" onclick="listar()">Recargar</button>
+  <table>
+    <thead><tr><th>Nombre</th><th>Precio</th><th>Marca</th><th>Categoría</th><th>Stock</th><th></th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<script>
+const API = 'http://localhost:3007';
+let token = '';
+
+async function login() {
+  const r = await fetch(API + '/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: document.getElementById('email').value,
+      password: document.getElementById('pass').value
+    })
+  });
+  if (r.ok) {
+    token = (await r.json()).data.token;
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('crud').classList.remove('hidden');
+    listar();
+  } else {
+    document.getElementById('msg').textContent = '❌ Credenciales inválidas';
+    document.getElementById('msg').className = 'err';
+  }
+}
+
+async function listar() {
+  const r = await fetch(API + '/auth/api/products', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+  const d = await r.json();
+  document.getElementById('tbody').innerHTML = (d.data || []).map(p =>
+    `<tr>
+      <td>${p.nombre}</td>
+      <td class="toRight">$${p.precio}</td>
+      <td>${p.marca || '-'}</td>
+      <td>${p.categoria || '-'}</td>
+      <td class="toRight">${p.stock ?? '-'}</td>
+      <td><button onclick="eliminar('${p.id}')">✕</button></td>
+    </tr>`
+  ).join('');
+}
+
+async function crear() {
+  const body = {
+    nombre: document.getElementById('fNombre').value,
+    precio: +document.getElementById('fPrecio').value,
+    marca: document.getElementById('fMarca').value || undefined,
+    categoria: document.getElementById('fCategoria').value || undefined,
+    stock: document.getElementById('fStock').value ? +document.getElementById('fStock').value : undefined
+  };
+  const r = await fetch(API + '/auth/api/products/create', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+    body: JSON.stringify(body)
+  });
+  if (r.ok) {
+    document.getElementById('fNombre').value = '';
+    document.getElementById('fPrecio').value = '';
+    document.getElementById('fMarca').value = '';
+    document.getElementById('fCategoria').value = '';
+    document.getElementById('fStock').value = '';
+    listar();
+  } else {
+    alert((await r.json()).message);
+  }
+}
+
+async function eliminar(id) {
+  if (!confirm('¿Eliminar?')) return;
+  await fetch(API + '/auth/api/products/' + id, {
+    method: 'DELETE',
+    headers: { Authorization: 'Bearer ' + token }
+  });
+  listar();
+}
+</script>
+</body>
+</html>   
