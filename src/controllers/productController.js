@@ -25,8 +25,7 @@ export async function getAllProducts(req,res) {
     }}
 
 export const getProductsById = async (req,res) => {   //se verifica acá poraue no lo tengo q dejar llegar a la capa de servicios, een el caso de categoria es opcional pero el id es obligatorio => no lo dejo llegar a la capa de servicios para verificarlo, si no hay ID ya lo reboto acá
-    try{    // usar siempre el try/ catch
-  
+    try{   
     const id = req.params.id;
         if (!id) {
         return res.status(400).json({ message: "El ID es obligatorio" });

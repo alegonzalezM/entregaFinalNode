@@ -8,7 +8,6 @@ export async function loginUser(req, res) {
       message: "Se requieren los campos email y password",
     });
   }
-
   try {
     const userData = await loginUserService(email, password);
     return res.status(200).json({

@@ -10,8 +10,7 @@ export async function getAllCategories(req, res) {
     }
   } catch (e) {
     res.status(500).json({ message: "Error en la solicitud: " + e.message });
-  }
-}
+  }}
 
 export async function getCategoryById(req, res) {
   try {
@@ -27,8 +26,7 @@ export async function getCategoryById(req, res) {
     }
   } catch (e) {
     res.status(500).json({ message: "Error en la solicitud: " + e.message });
-  }
-}
+  }}
 
 export async function createCategory(req, res) {
   try {
@@ -40,8 +38,7 @@ export async function createCategory(req, res) {
     res.status(201).json({ message: "Categoría creada:", data: newCategory });
   } catch (e) {
     res.status(500).json({ message: "Error en la solicitud: " + e.message });
-  }
-}
+  }}
 
 export async function deleteCategory(req, res) {
   try {
@@ -54,5 +51,4 @@ export async function deleteCategory(req, res) {
     }
   } catch (e) {
     res.status(500).json({ message: "Error en la solicitud: " + e.message });
-  }
-}   
+  }}   

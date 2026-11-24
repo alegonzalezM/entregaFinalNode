@@ -51,6 +51,10 @@ Todas requieren header Authorization: Bearer <token>.
 
 Campos obligatorios: nombre, precio, marca, categoria, stock.
 
+## 🌐 Demo
+
+[https://entrega-final-node-olive.vercel.app]
+
 
 
 

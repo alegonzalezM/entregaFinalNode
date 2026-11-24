@@ -8,7 +8,7 @@
     h1 { 
         font-size: 1.4rem; }
     .placeh::placeholder {
-      color: rgba(82, 240, 87, 0.5);
+      color: rgba(140, 90, 38, 0.5);
     }
     input { 
         padding: 6px;
