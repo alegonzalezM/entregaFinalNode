@@ -8,11 +8,12 @@
 <body>
 
 <h1>API de Productos</h1>
+<h2>Ingresa las credenciales: </h2>
 
 <!-- LOGIN -->
 <div id="login">
-  <input id="email" value="" placeholder="admin@gmail.com" id="placeh">
-  <input id="pass" type="password" value="" placeholder="123456" id="placeh">
+  <input id="email" value="" placeholder="admin@gmail.com" class="placeh">
+  <input id="pass" type="password" value="" placeholder="123456" class="placeh">
   <button onclick="login()">Ingresar</button>
   <span id="msg"></span>
 </div>
@@ -37,6 +38,7 @@
 
 <script>
 const API = 'https://entrega-final-node-olive.vercel.app';   
+
 let token = '';
 
 async function login() {

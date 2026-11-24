@@ -7,8 +7,8 @@
         padding: 0 16px; }
     h1 { 
         font-size: 1.4rem; }
-    #placeh{
-      color: rgba(191, 217, 240, 0.5);
+    .placeh::placeholder {
+      color: rgba(82, 240, 87, 0.5);
     }
     input { 
         padding: 6px;
