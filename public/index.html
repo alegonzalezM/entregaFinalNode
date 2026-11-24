@@ -8,7 +8,7 @@
 <body>
 
 <h1>API de Productos</h1>
-<h2>Ingresa las credenciales: </h2>
+<h2 id="titulo">Ingresa las credenciales:</h2>
 
 <!-- LOGIN -->
 <div id="login">
@@ -53,6 +53,7 @@ async function login() {
   if (r.ok) {
     token = (await r.json()).data.token;
     document.getElementById('login').classList.add('hidden');
+    document.getElementById('titulo').classList.add('hidden');
     document.getElementById('crud').classList.remove('hidden');
     listar();
   } else {
