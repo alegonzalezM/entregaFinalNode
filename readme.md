@@ -14,8 +14,8 @@ nodemon start
 Ingresar las credenciales para crear un token válido:
 POST http://localhost:3007/api/login
 
- 1) { id: 1, email: 'admin@gmail.com', password: '123456' }
- 2) { id: 2, email: 'admin@test.com', password: 'admin123' }
+ 1) { "id": 1, "email": "admin@gmail.com", "password": "123456" }
+ 2) { "id": 2, "email": "admin@test.com", "password": "admin123" }
 
 Devuelve { "token": "eyJ..." }. Expira a los 60 min.
 El token obtenido utilizarlo en pestaña Authorization (Bearer Token) para realizar una consulta a alguna de las siguientes rutas:

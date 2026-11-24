@@ -5,9 +5,12 @@ import authRouter from './src/routes/authRoutes.js';
 import productsRouter from './src/routes/productsRoutes.js';
 import { authentication } from './src/middlewares/authentication.js';
 import categoriesRouter from './src/routes/categoriesRoutes.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 3007;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(cors({
   origin: '*',
@@ -22,6 +25,8 @@ app.use((req, res, next) => {
 
 
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 //rutas publicas
 app.use('/api', authRouter);
@@ -47,9 +52,15 @@ app.use((err, req, res, next) => {
   });
 });
 
+// app.listen(PORT, () => {
+//   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+// });   
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});   
 
-export default app;
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  });
+}
+
+export default app;   
